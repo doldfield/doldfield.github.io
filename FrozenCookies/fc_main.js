@@ -884,7 +884,7 @@ function autoFTHOFComboAction() {
 		autoFTHOFComboAction.state = 0;
 	}
 
-	if (autoFTHOFComboAction.state != 2) {
+	if (autoFTHOFComboAction.state == 0) {
 		if ((nextSpellName(0) == "Click Frenzy" && nextSpellName(1) == "Building Special") || 
 		    (nextSpellName(1) == "Click Frenzy" && nextSpellName(0) == "Building Special") ||
 		    (nextSpellName(0) == "Click Frenzy" && nextSpellName(1) == "Elder Frenzy") || 		
@@ -925,7 +925,7 @@ function autoFTHOFComboAction() {
 
 						case 1:							
 							if (Game.Objects['Wizard tower'].amount >= 316) {
-								if (goldenCookieLife()) return;
+								if (goldenCookieLife() || BuildingSpecialBuff() < 1) return;
 								autoFTHOFComboAction.count = Game.Objects['Wizard tower'].amount - 22;
 								M.castSpell(FTHOF);
 
