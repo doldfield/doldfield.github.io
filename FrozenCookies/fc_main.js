@@ -873,7 +873,9 @@ function autoCast() {
 // Thank goodness for static variables otherwise this function would not have worked as intended.
 function autoFTHOFComboAction() {
 	if (Game.Objects['Wizard tower'].level > 10 || FrozenCookies.autoFTHOFCombo == 0) return; // THIS WILL NOT WORK IF TOWER LEVEL IS ABOVE 10
-		
+	
+	if (goldenCookieLife()) return;
+	
 	if (typeof autoFTHOFComboAction.count == 'undefined') {
 		autoFTHOFComboAction.count = Game.Objects['Wizard tower'].amount;
 	}
@@ -896,6 +898,8 @@ function autoFTHOFComboAction() {
 		var FTHOF = M.spellsById[1];
 		var SugarLevel = Game.Objects['Wizard tower'].level;
 		
+		if (goldenCookieLife()) return;
+		
 		switch (autoFTHOFComboAction.state)
 		{
 			case 0:
@@ -905,7 +909,7 @@ function autoFTHOFComboAction() {
 				return;
 
 			case 1:
-				if (!goldenCookieLife() &&Game.hasBuff('Frenzy') && BuildingSpecialBuff() == 1 && Game.hasBuff('Frenzy').time / 30 >= Math.ceil(13 * BuffTimeFactor()) - 1 && BuildingBuffTime() >= Math.ceil(13 * BuffTimeFactor())) {
+				if (Game.hasBuff('Frenzy') && BuildingSpecialBuff() == 1 && Game.hasBuff('Frenzy').time / 30 >= Math.ceil(13 * BuffTimeFactor()) - 1 && BuildingBuffTime() >= Math.ceil(13 * BuffTimeFactor())) {
 					if (FrozenCookies.autoBuy > 0) {
 						autoFTHOFComboAction.autobuyyes = 1;
 					}
@@ -921,6 +925,7 @@ function autoFTHOFComboAction() {
 
 						case 1:							
 							if (Game.Objects['Wizard tower'].amount >= 316) {
+								if (goldenCookieLife()) return;
 								autoFTHOFComboAction.count = Game.Objects['Wizard tower'].amount - 22;
 								M.castSpell(FTHOF);
 
