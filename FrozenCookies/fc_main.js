@@ -885,10 +885,14 @@ function autoFTHOFComboAction() {
 	}
 
 	if (autoFTHOFComboAction.state == 0) {
-		if ((nextSpellName(0) == "Click Frenzy" && nextSpellName(1) == "Building Special") || 
-		    (nextSpellName(1) == "Click Frenzy" && nextSpellName(0) == "Building Special") ||
-		    (nextSpellName(0) == "Click Frenzy" && nextSpellName(1) == "Elder Frenzy") || 		
-		    (nextSpellName(1) == "Click Frenzy" && nextSpellName(0) == "Elder Frenzy")) {
+		var spell1 = nextSpellName(0);
+		var spell2 = nextSpellName(1);
+		logEvent('Spell1', spell1);
+		logEvent('Spell2', spell2);
+		if ((spell1 == "Click Frenzy" && spell2 == "Building Special") || 
+		    (spell2 == "Click Frenzy" && spell1 == "Building Special") ||
+		    (spell1 == "Click Frenzy" && spell2 == "Elder Frenzy") || 		
+		    (spell2 == "Click Frenzy" && spell1 == "Elder Frenzy")) {
 			autoFTHOFComboAction.state = 1;
 		}
 		else { autoFTHOFComboAction.state = 0; }
